@@ -24,3 +24,43 @@ jobs:
         run: |
           cd app/android
           ./gradlew lint
+
+  check_with_pub_get:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Run pub get
+        run: flutter pub get
+
+      - name: Echo if local.properties exists
+        run: |
+          if [ -f app/android/local.properties ]; then
+            echo "local.properties exists"
+          else
+            echo "local.properties does not exist"
+          fi
+
+      - name: Run pub get in app
+        run: |
+          cd app
+          flutter pub get
+
+      - name: Echo if local.properties exists now
+        run: |
+          if [ -f app/android/local.properties ]; then
+            echo "local.properties exists"
+          else
+            echo "local.properties does not exist"
+          fi
+
+      - name: Lint Android
+        run: |
+          cd app/android
+          ./gradlew lint
