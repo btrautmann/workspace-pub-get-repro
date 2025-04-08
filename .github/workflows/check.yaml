@@ -18,9 +18,9 @@ jobs:
           channel: stable
 
       - name: Run pub get
-        run: flutter
+        run: flutter pub get
 
       - name: Lint Android
         run: |
-          cd android
+          cd app/android
           ./gradlew lint
