@@ -1,0 +1,7 @@
+name: my_workspace
+
+workspace:
+  - app
+
+environment:
+  sdk: ^3.7.2
